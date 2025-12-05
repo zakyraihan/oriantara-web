@@ -47,7 +47,7 @@ export default function OriantaraLanding() {
                                 href="https://wa.me/6285780560420"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="px-6 py-2 border border-amber-600 text-amber-500 rounded-full text-sm font-medium hover:bg-amber-600 hover:text-white transition-all"
+                                className="cursor-pointer px-6 py-2 border border-amber-600 text-amber-500 rounded-full text-sm font-medium hover:bg-amber-600 hover:text-white transition-all"
                             >
                                 CONTACT US
                             </a>
