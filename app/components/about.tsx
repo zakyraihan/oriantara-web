@@ -32,29 +32,22 @@ export default function AboutSection() {
                             href="#more-about"
                             className="text-amber-400 font-semibold hover:text-amber-500 transition-all inline-flex items-center"
                         >
-                            More About Us
-                            <span className="ml-2">➜</span>
+                            More About Us <span className="ml-2">➜</span>
                         </a>
                     </div>
 
-                    {/* RIGHT — IMAGE */}
-                    <div className="relative bg-[#121212]">
-                        <div
-                            className="absolute inset-0 bg-cover bg-center opacity-25"
-                            style={{
-                                backgroundImage: `url('/assets/INDONESIA.png')`,
-                            }}
-                        />
+                    {/* RIGHT — PARALLAX BACKGROUND */}
+                    <div
+                        className="relative bg-fixed bg-cover bg-center"
+                        style={{
+                            backgroundImage: `url('/assets/INDONESIA.png')`,
+                            backgroundAttachment: "fixed",
+                        }}
+                    >
+                        {/* BLACK OVERLAY */}
+                        <div className="absolute inset-0 bg-black/40"></div>
 
-                        {/* Overlay */}
-                        <div className="absolute inset-0">
-                            <img
-                                src="/assets/INDONESIA.png"
-                                alt="background"
-                                className="w-full h-full object-cover"
-                            />
-                        </div>
-
+                        {/* HEIGHT */}
                         <div className="relative h-80 lg:h-full"></div>
                     </div>
 
