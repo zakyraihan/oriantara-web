@@ -12,7 +12,7 @@ export default function OriantaraLanding() {
     const words = [
         "SPICES EXPORTER",
         "HERBS SUPPLIER",
-        "PREMIUM SEASONINGS",
+        "SEASONINGS",
         "COMMODITIES",
         "ORGANIC SPICE",
     ];
