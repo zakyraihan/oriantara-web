@@ -1,4 +1,5 @@
 "use client"
+import { TextShimmer } from '@/components/motion-primitives/text-shimmer';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
@@ -31,7 +32,7 @@ export default function OriantaraLanding() {
                 // Typing
                 if (displayText.length < currentWord.length) {
                     setDisplayText(currentWord.substring(0, displayText.length + 1));
-                    setTypingSpeed(150);
+                    setTypingSpeed(100);
                 } else {
                     // Pause at end of word
                     setTimeout(() => setIsDeleting(true), 2000);
@@ -40,7 +41,7 @@ export default function OriantaraLanding() {
                 // Deleting
                 if (displayText.length > 0) {
                     setDisplayText(currentWord.substring(0, displayText.length - 1));
-                    setTypingSpeed(100);
+                    setTypingSpeed(50);
                 } else {
                     // Move to next word
                     setIsDeleting(false);
@@ -165,10 +166,16 @@ export default function OriantaraLanding() {
                     <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
                         INDONESIA PREMIUM
                         <br />
-                        <span className="bg-gradient-to-r from-gray-300 via-gray-400 to-white bg-clip-text text-transparent">
+                        {/* <span className="bg-gradient-to-r from-gray-300 via-gray-400 to-white bg-clip-text text-transparent">
                             {displayText}
                             <span className="animate-pulse">|</span>
-                        </span>
+                        </span> */}
+                        <TextShimmer
+                            duration={1.2}
+                            className='text-4xl md:text-6xl lg:text-7xl [--base-color:var(--color-gray-300)] [--base-gradient-color:var(--color-white)] dark:[--base-color:var(--color-gray-300)] dark:[--base-gradient-color:var(--color-white)]'
+                        >
+                            {displayText}
+                        </TextShimmer>
                     </h1>
 
                     <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
