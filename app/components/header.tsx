@@ -18,14 +18,41 @@ export default function OriantaraLanding() {
     ];
 
     const [index, setIndex] = useState(0);
+    const [wordIndex, setWordIndex] = useState(0);
+    const [displayText, setDisplayText] = useState("");
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [typingSpeed, setTypingSpeed] = useState(150);
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setIndex((prev) => (prev + 1) % words.length);
-        }, 2000); // ganti setiap 2 detik
+        const currentWord = words[wordIndex];
 
-        return () => clearInterval(interval);
-    }, []);
+        const handleTyping = () => {
+            if (!isDeleting) {
+                // Typing
+                if (displayText.length < currentWord.length) {
+                    setDisplayText(currentWord.substring(0, displayText.length + 1));
+                    setTypingSpeed(150);
+                } else {
+                    // Pause at end of word
+                    setTimeout(() => setIsDeleting(true), 2000);
+                }
+            } else {
+                // Deleting
+                if (displayText.length > 0) {
+                    setDisplayText(currentWord.substring(0, displayText.length - 1));
+                    setTypingSpeed(100);
+                } else {
+                    // Move to next word
+                    setIsDeleting(false);
+                    setWordIndex((prev) => (prev + 1) % words.length);
+                }
+            }
+        };
+
+        const timer = setTimeout(handleTyping, typingSpeed);
+        return () => clearTimeout(timer);
+    }, [displayText, isDeleting, wordIndex, typingSpeed]);
+
 
     return (
         <div className="min-h-screen  text-white">
@@ -139,7 +166,8 @@ export default function OriantaraLanding() {
                         INDONESIA PREMIUM
                         <br />
                         <span className="bg-gradient-to-r from-gray-300 via-gray-400 to-white bg-clip-text text-transparent">
-                            {words[index]}
+                            {displayText}
+                            <span className="animate-pulse">|</span>
                         </span>
                     </h1>
 
