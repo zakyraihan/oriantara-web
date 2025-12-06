@@ -4,7 +4,7 @@ import { useState, useRef, useCallback, RefObject, useEffect } from "react";
 type ScrollDirection = 'left' | 'right';
 
 interface UseHorizontalScrollReturn {
-    scrollRef: RefObject<HTMLDivElement>;
+    scrollRef: RefObject<HTMLDivElement | null>;
     canScrollLeft: boolean;
     canScrollRight: boolean;
     checkScroll: () => void;
