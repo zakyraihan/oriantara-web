@@ -32,7 +32,7 @@ export default function OriantaraLanding() {
                 // Typing
                 if (displayText.length < currentWord.length) {
                     setDisplayText(currentWord.substring(0, displayText.length + 1));
-                    setTypingSpeed(100);
+                    setTypingSpeed(150);
                 } else {
                     // Pause at end of word
                     setTimeout(() => setIsDeleting(true), 2000);
@@ -41,7 +41,7 @@ export default function OriantaraLanding() {
                 // Deleting
                 if (displayText.length > 0) {
                     setDisplayText(currentWord.substring(0, displayText.length - 1));
-                    setTypingSpeed(50);
+                    setTypingSpeed(70);
                 } else {
                     // Move to next word
                     setIsDeleting(false);
