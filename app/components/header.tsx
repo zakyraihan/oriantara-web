@@ -163,7 +163,7 @@ export default function OriantaraLanding() {
 
                 {/* Content */}
                 <div className="relative z-10 text-center px-4 max-w-5xl mx-auto pt-20 fade-in">
-                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+                    <h1 className="text-4xl animate-pulse md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
                         INDONESIA PREMIUM
                         <br />
                         {/* <span className="bg-gradient-to-r from-gray-300 via-gray-400 to-white bg-clip-text text-transparent">
