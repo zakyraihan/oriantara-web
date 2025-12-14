@@ -184,7 +184,7 @@ export default function OriantaraLanding() {
 
                     <button
                         onClick={() => router.push("/brosur")}
-                        className="px-6 py-2 bg-gray-600 text-white rounded-full"
+                        className="px-6 py-2 bg-gray-600 animate-spin text-white rounded-full"
                     >
                         Download Brosur
                     </button>
