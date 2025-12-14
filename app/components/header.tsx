@@ -184,7 +184,7 @@ export default function OriantaraLanding() {
 
                     <button
                         onClick={() => router.push("/brosur")}
-                        className="px-6 py-2 bg-gradient-to-r from-gray-600 to-gray-300 hover:from-gray-700 hover:to-gray-400 text-white rounded-full transition-all duration-300"
+                        className="px-6 py-2 bg-gradient-to-br from-gray-600 to-white text-white rounded-full animate-pulse"
                     >
                         Download Brosur
                     </button>
