@@ -93,7 +93,7 @@ export default function OriantaraLanding() {
                                 href="https://wa.me/6285780560420"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="cursor-pointer px-6 py-2 border border-amber-600 text-amber-500 rounded-full text-sm font-medium hover:bg-amber-600 hover:text-white transition-all"
+                                className="cursor-pointer px-6 py-2 border border-gray-400 text-gray-300 rounded-full text-sm font-medium hover:bg-amber-600 hover:text-white transition-all"
                             >
                                 CONTACT US
                             </a>
@@ -123,7 +123,7 @@ export default function OriantaraLanding() {
                             <a href="#about" className="block text-sm font-medium hover:text-amber-500">ABOUT</a>
                             <a href="#product" className="block text-sm font-medium hover:text-amber-500">PRODUCT</a>
                             <a href="#services" className="block text-sm font-medium hover:text-amber-500">OUR SERVICES</a>
-                            <button className="w-full px-6 py-2 border border-amber-600 text-amber-500 rounded-full text-sm font-medium">
+                            <button className="w-full px-6 py-2 border border-gray-600 text-gray-500 rounded-full text-sm font-medium">
                                 CONTACT US
                             </button>
                         </div>
@@ -184,18 +184,18 @@ export default function OriantaraLanding() {
 
                     <button
                         onClick={() => router.push("/brosur")}
-                        className="px-6 py-2 bg-amber-600 text-white rounded-full"
+                        className="px-6 py-2 bg-gray-600 text-white rounded-full"
                     >
                         Download Brosur
                     </button>
 
                     <div className="mt-16 flex justify-center space-x-8 opacity-80">
                         <div className="text-center">
-                            <div className="text-3xl font-bold text-amber-500">50+</div>
+                            <div className="text-3xl font-bold text-gray-300">50+</div>
                             <div className="text-sm text-gray-300">Countries Served</div>
                         </div>
                         <div className="text-center">
-                            <div className="text-3xl font-bold text-amber-500">100%</div>
+                            <div className="text-3xl font-bold text-gray-300">100%</div>
                             <div className="text-sm text-gray-300">Premium Quality</div>
                         </div>
                     </div>
