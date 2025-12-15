@@ -190,7 +190,7 @@ export default function OriantaraLanding() {
                             backgroundPosition: "center",
                             backgroundRepeat: "no-repeat",
                         }}
-                        className="px-6 py-2 text-white w-[200px] h-[50px] rounded-full bg-gray-700 animate-pulse"
+                        className="px-6 py-2 text-white w-[200px] h-[50px] rounded-full bg-gray-700 "
                     >
 
                     </button>
