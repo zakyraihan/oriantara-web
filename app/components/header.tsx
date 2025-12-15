@@ -184,10 +184,17 @@ export default function OriantaraLanding() {
 
                     <button
                         onClick={() => router.push("/brosur")}
-                        className="px-6 py-2 bg-gradient-to-br from-gray-600 to-white text-white rounded-full animate-pulse"
+                        style={{
+                            backgroundImage: "url('/assets/EXPLORE PRODUCT.png')",
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                            backgroundRepeat: "no-repeat",
+                        }}
+                        className="px-6 py-2 text-white w-[200px] h-[50px] rounded-full bg-gray-700 animate-pulse"
                     >
-                        Download Brosur
+
                     </button>
+
 
                     <div className="mt-16 flex justify-center space-x-8 opacity-80">
                         <div className="text-center">
