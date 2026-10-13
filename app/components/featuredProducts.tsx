@@ -136,9 +136,8 @@ export default function FeaturedProduct() {
     }, [scrollRef]);
 
     const fx = (delay: number) => ({
-        className: `transition-all ${
-            visible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-10 blur-sm"
-        }`,
+        className: `transition-all ${visible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-10 blur-sm"
+            }`,
         style: {
             transitionDuration: reduced ? "0ms" : "900ms",
             transitionDelay: reduced ? "0ms" : `${delay}ms`,
@@ -228,11 +227,10 @@ export default function FeaturedProduct() {
                                 key={f}
                                 onClick={() => setFilter(f)}
                                 aria-pressed={on}
-                                className={`rounded-full border px-5 py-2 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
-                                    on
-                                        ? "border-white bg-white text-[#0a0a0a]"
-                                        : "border-white/30 text-white hover:border-white hover:bg-white/10"
-                                }`}
+                                className={`rounded-full border px-5 py-2 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${on
+                                    ? "border-white bg-white text-[#0a0a0a]"
+                                    : "border-white/30 text-white hover:border-white hover:bg-white/10"
+                                    }`}
                             >
                                 {f} <span className={on ? "text-black/50" : "text-white/50"}>{count}</span>
                             </button>
@@ -250,9 +248,8 @@ export default function FeaturedProduct() {
                     {list.map((item, i) => (
                         <article
                             key={item.name}
-                            className={`group relative min-w-[62%] shrink-0 snap-start overflow-hidden rounded-2xl border bg-neutral-900 sm:min-w-[250px] sm:max-w-[250px] lg:min-w-[280px] lg:max-w-[280px] ${
-                                item.active ? "border-white/60" : "border-white/15"
-                            } hover:border-white ${fx(300 + i * 150).className}`}
+                            className={`group relative w-[68vw] max-w-[260px] shrink-0 snap-start overflow-hidden rounded-2xl border bg-neutral-900 sm:w-[250px] sm:max-w-none lg:w-[280px] ${item.active ? "border-white/60" : "border-white/15"
+                                } hover:border-white ${fx(300 + i * 150).className}`}
                             style={fx(300 + i * 150).style}
                         >
                             <div className="relative aspect-[4/5] w-full overflow-hidden">
