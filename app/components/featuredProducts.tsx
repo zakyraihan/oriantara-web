@@ -44,7 +44,7 @@ const PRODUCTS: Product[] = [
         active: false,
     },
     {
-        name: "Charcoal Briquettes",
+        name: "Charcoal Briquette",
         category: "Commodities",
         desc: "Coconut-based charcoal briquettes, uniform in shape and easy to pack and ship.",
         img: "/assets/BRIKET 1.png",
