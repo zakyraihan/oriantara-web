@@ -19,8 +19,8 @@ export default function NotaToko() {
         { id: 1, banyaknya: 0, namaBarang: '', harga: 0, jumlah: 0 }
     ]);
 
-    const namaBarangOptions = ['500 UP', '300 UP', '200 UP', 'BS'];
-    const hargaOptions = [280, 230, 150, 110];
+    const namaBarangOptions = ['500 UP', '300 UP', '200 UP', 'BS', 'STN 200/300 UP', 'STN 500 UP', 'STN 1000 UP'];
+    const hargaOptions = [470, 450, 330, 170, 200, 300, 180];
 
     useEffect(() => {
         // Set tanggal otomatis
@@ -43,6 +43,7 @@ export default function NotaToko() {
                 }
                 return updated;
             }
+            
             return item;
         }));
     };
