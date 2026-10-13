@@ -4,9 +4,9 @@ import Image from "next/image";
 
 // ===== Data kontak: ubah di sini saja =====
 const EMAIL = "oriantaragroup@gmail.com";
-const PHONE_DISPLAY = "+62-812-6777-9335";
-const PHONE_TEL = "+6281267779335";
-const WA_NUMBER = "6281267779335";
+const PHONE_DISPLAY = "+62-857-8056-0420";
+const PHONE_TEL = "+6285780560420";
+const WA_NUMBER = "6285780560420";
 const WA_QUOTE = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hello Oriantara, I would like to request a quote.")}`;
 
 const COMPANY_LINKS = [
