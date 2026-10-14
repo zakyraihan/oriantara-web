@@ -3,132 +3,106 @@ import { TextShimmer } from '@/components/motion-primitives/text-shimmer';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
-import { Fraunces, Manrope } from 'next/font/google';
 
-const display = Fraunces({ subsets: ['latin'], weight: ['600', '700'], display: 'swap' });
-const body = Manrope({ subsets: ['latin'], weight: ['400', '500', '600'], display: 'swap' });
 
-const WORDS = [
-    "SPICES EXPORTER",
-    "HERBS SUPPLIER",
-    "SEASONINGS",
-    "COMMODITIES",
-    "ORGANIC SPICE",
-];
-
-const SPICES = [
-    "Nutmeg", "Cloves", "Cinnamon", "Black Pepper", "Turmeric",
-    "Vanilla", "Ginger", "Cardamom", "Mace", "Lemongrass",
-];
-
-const NAV = [
-    { label: "Home", href: "#home" },
-    { label: "About", href: "#about" },
-    { label: "Product", href: "#product" },
-    { label: "Our Services", href: "#services" },
-];
-
-const WA = "https://wa.me/6285780560420";
-const WA_QUOTE = `${WA}?text=${encodeURIComponent("Hello Oriantara, I would like to request a quotation.")}`;
 
 export default function OriantaraLanding() {
-    const router = useRouter();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
+    var router = useRouter()
 
-    // Typewriter
+    const words = [
+        "SPICES EXPORTER",
+        "HERBS SUPPLIER",
+        "SEASONINGS",
+        "COMMODITIES",
+        "ORGANIC SPICE",
+    ];
+
+    const [index, setIndex] = useState(0);
     const [wordIndex, setWordIndex] = useState(0);
     const [displayText, setDisplayText] = useState("");
     const [isDeleting, setIsDeleting] = useState(false);
+    const [typingSpeed, setTypingSpeed] = useState(150);
 
     useEffect(() => {
-        const current = WORDS[wordIndex];
-        let timer: ReturnType<typeof setTimeout> | undefined;
+        const currentWord = words[wordIndex];
 
-        if (!isDeleting && displayText === current) {
-            timer = setTimeout(() => setIsDeleting(true), 1800);
-        } else if (isDeleting && displayText === "") {
-            setIsDeleting(false);
-            setWordIndex((i) => (i + 1) % WORDS.length);
-        } else {
-            timer = setTimeout(
-                () => setDisplayText(current.substring(0, displayText.length + (isDeleting ? -1 : 1))),
-                isDeleting ? 55 : 105
-            );
-        }
+        const handleTyping = () => {
+            if (!isDeleting) {
+                // Typing
+                if (displayText.length < currentWord.length) {
+                    setDisplayText(currentWord.substring(0, displayText.length + 1));
+                    setTypingSpeed(150);
+                } else {
+                    // Pause at end of word
+                    setTimeout(() => setIsDeleting(true), 2000);
+                }
+            } else {
+                // Deleting
+                if (displayText.length > 0) {
+                    setDisplayText(currentWord.substring(0, displayText.length - 1));
+                    setTypingSpeed(70);
+                } else {
+                    // Move to next word
+                    setIsDeleting(false);
+                    setWordIndex((prev) => (prev + 1) % words.length);
+                }
+            }
+        };
+
+        const timer = setTimeout(handleTyping, typingSpeed);
         return () => clearTimeout(timer);
-    }, [displayText, isDeleting, wordIndex]);
+    }, [displayText, isDeleting, wordIndex, typingSpeed]);
 
-    // Navbar turns solid after scrolling
-    useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 40);
-        onScroll();
-        window.addEventListener("scroll", onScroll, { passive: true });
-        return () => window.removeEventListener("scroll", onScroll);
-    }, []);
 
     return (
-        <div className={`${body.className} min-h-screen bg-[#0a0a0a] text-[#f5f5f5]`}>
-            <style>{`
-                @keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
-                @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-                @keyframes drift { 0%,100% { transform: translate3d(0,0,0); } 50% { transform: translate3d(0,-18px,0); } }
-                .rise { opacity: 0; animation: rise .9s cubic-bezier(.2,.7,.2,1) forwards; }
-                .marquee-track { animation: marquee 38s linear infinite; }
-                .drift { animation: drift 9s ease-in-out infinite; }
-                @media (prefers-reduced-motion: reduce) {
-                    .rise { opacity: 1; animation: none; }
-                    .marquee-track, .drift { animation: none; }
-                }
-            `}</style>
-
+        <div className="min-h-screen ">
             {/* Navigation */}
-            <nav
-                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-                    scrolled
-                        ? "bg-[#0a0a0a]/90 backdrop-blur-md border-b border-[#ffffff]/20 shadow-lg shadow-black/30"
-                        : "bg-gradient-to-b from-black/60 to-transparent"
-                }`}
-            >
+            <nav className="fixed top-0 left-0 right-0 z-50  backdrop-blur-sm border-b border-gray-800">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className={`flex justify-between items-center transition-all duration-300 ${scrolled ? "h-16" : "h-20"}`}>
-                        <a href="#home" aria-label="Oriantara home">
-                            <Image
-                                src="/assets/LOGO.png"
-                                alt="Oriantara logo"
-                                width={190}
-                                height={190}
-                                priority
-                                className={`w-auto transition-all duration-300 ${scrolled ? "h-10" : "h-14"}`}
-                            />
-                        </a>
-
-                        <div className="hidden md:flex items-center gap-9">
-                            {NAV.map((item) => (
-                                <a
-                                    key={item.href}
-                                    href={item.href}
-                                    className="group relative text-sm font-medium tracking-wide text-[#f5f5f5]/70 hover:text-white transition-colors"
-                                >
-                                    {item.label}
-                                    <span className="absolute -bottom-1 left-0 h-px w-0 bg-[#ffffff] transition-all duration-300 group-hover:w-full" />
-                                </a>
-                            ))}
-                            <a
-                                href={WA}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="rounded-full bg-[#ffffff] px-6 py-2.5 text-sm font-semibold text-[#0a0a0a] transition hover:bg-[#d4d4d4] hover:shadow-[0_0_24px_rgba(255,255,255,.35)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffffff]"
-                            >
-                                Contact us
-                            </a>
+                    <div className="flex justify-between items-center h-20">
+                        {/* Logo */}
+                        <div className="flex items-center space-x-3">
+                            {/* <div className="w-12 h-12 bg-gradient-to-br from-amber-600 to-amber-800 rounded-lg flex items-center justify-center">
+                            </div> */}
+                            <Image src={"/assets/LOGO.png"} alt={'logo'} width={190} height={190} />
+                            {/* <div>
+                                <div className="text-lg font-bold tracking-wider">ORIANTARA</div>
+                                <div className="text-xs text-gray-400">GROUP</div>
+                            </div> */}
                         </div>
 
+                        {/* Desktop Menu */}
+                        <div className="hidden md:flex items-center space-x-8">
+                            <a href="#home" className="text-sm font-medium hover:text-amber-500 transition-colors">
+                                HOME
+                            </a>
+                            <a href="#about" className="text-sm font-medium hover:text-amber-500 transition-colors">
+                                ABOUT
+                            </a>
+                            <a href="#product" className="text-sm font-medium hover:text-amber-500 transition-colors">
+                                PRODUCT
+                            </a>
+                            <a href="#services" className="text-sm font-medium hover:text-amber-500 transition-colors">
+                                OUR SERVICES
+                            </a>
+
+                            <a
+                                href="https://wa.me/6285780560420"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="cursor-pointer px-6 py-2 border border-gray-400 text-gray-300 rounded-full text-sm font-medium hover:bg-amber-600 hover:text-white transition-all"
+                            >
+                                CONTACT US
+                            </a>
+
+
+                        </div>
+
+                        {/* Mobile menu button */}
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                             className="md:hidden p-2"
-                            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-                            aria-expanded={isMenuOpen}
                         >
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 {isMenuOpen ? (
@@ -140,35 +114,28 @@ export default function OriantaraLanding() {
                         </button>
                     </div>
 
+                    {/* Mobile Menu */}
                     {isMenuOpen && (
-                        <div className="md:hidden py-5 space-y-4 border-t border-[#ffffff]/20 bg-[#0a0a0a]/95">
-                            {NAV.map((item) => (
-                                <a
-                                    key={item.href}
-                                    href={item.href}
-                                    onClick={() => setIsMenuOpen(false)}
-                                    className="block text-base font-medium hover:text-[#ffffff]"
-                                >
-                                    {item.label}
-                                </a>
-                            ))}
-                            <a
-                                href={WA}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="block w-full rounded-full bg-[#ffffff] px-6 py-2.5 text-center text-sm font-semibold text-[#0a0a0a]"
-                            >
-                                Contact us
-                            </a>
+                        <div className="md:hidden py-4 space-y-4">
+                            <a href="#home" className="block text-sm font-medium hover:text-amber-500">HOME</a>
+                            <a href="#about" className="block text-sm font-medium hover:text-amber-500">ABOUT</a>
+                            <a href="#product" className="block text-sm font-medium hover:text-amber-500">PRODUCT</a>
+                            <a href="#services" className="block text-sm font-medium hover:text-amber-500">OUR SERVICES</a>
+                            <button className="w-full px-6 py-2 border border-gray-600 text-gray-500 rounded-full text-sm font-medium">
+                                CONTACT US
+                            </button>
                         </div>
                     )}
                 </div>
             </nav>
 
-            {/* Hero */}
-            <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+            {/* Hero Section */}
+            {/* Hero Section */}
+            <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+
+                {/* Background Video */}
                 <video
-                    className="absolute inset-0 w-full h-full object-cover scale-105"
+                    className="absolute inset-0 w-full h-full object-cover"
                     src="/assets/video.mp4"
                     autoPlay
                     loop
@@ -176,108 +143,78 @@ export default function OriantaraLanding() {
                     playsInline
                 />
 
-                {/* Warm overlay + vignette so text stays readable on any video frame */}
-                <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/80 via-[#0a0a0a]/45 to-[#0a0a0a]" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,.7)_100%)]" />
+                {/* Dark Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70"></div>
 
-                {/* Soft spice glow, slow floating */}
-                <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-                    <div className="drift absolute top-24 left-[8%] h-40 w-40 rounded-full bg-white/10 blur-3xl" />
-                    <div className="drift absolute bottom-40 right-[8%] h-52 w-52 rounded-full bg-white/10 blur-3xl" style={{ animationDelay: "2s" }} />
+                {/* Spice Glow Overlay */}
+                <div className="absolute inset-0 opacity-25">
+                    <div className="absolute top-20 left-10 w-32 h-32 bg-amber-600/40 rounded-full blur-3xl animate-pulse"></div>
+                    <div
+                        className="absolute bottom-20 right-10 w-40 h-40 bg-orange-600/40 rounded-full blur-3xl animate-pulse"
+                        style={{ animationDelay: "1s" }}
+                    ></div>
+                    <div
+                        className="absolute top-1/2 left-1/4 w-24 h-24 bg-red-600/40 rounded-full blur-3xl animate-pulse"
+                        style={{ animationDelay: "2s" }}
+                    ></div>
                 </div>
 
-                <div className="relative z-10 mx-auto max-w-5xl px-5 pt-28 pb-44 text-center">
-                    <p
-                        className="rise mx-auto mb-7 inline-flex items-center gap-2 rounded-full border border-[#ffffff]/40 bg-black/30 px-4 py-1.5 text-sm text-[#d4d4d4] backdrop-blur"
-                        style={{ animationDelay: "0.1s" }}
-                    >
-                        <span className="h-1.5 w-1.5 rounded-full bg-[#ffffff]" />
-                        Direct from Indonesia, shipped worldwide
-                    </p>
-
-                    <h1
-                        className={`${display.className} rise text-[2.6rem] leading-[1.08] sm:text-6xl lg:text-7xl font-bold tracking-tight`}
-                        style={{ animationDelay: "0.25s" }}
-                    >
-                        Indonesia Premium
-                        <span className="mt-2 block min-h-[1.15em]">
-                            <TextShimmer
-                                as="span"
-                                duration={1.4}
-                                className="text-[2.1rem] sm:text-5xl lg:text-6xl [--base-color:#9ca3af] [--base-gradient-color:#ffffff] dark:[--base-color:#9ca3af] dark:[--base-gradient-color:#ffffff]"
-                            >
-                                {displayText || "\u00A0"}
-                            </TextShimmer>
-                        </span>
+                {/* Content */}
+                <div className="relative z-10 text-center px-4 max-w-5xl mx-auto pt-20 fade-in">
+                    <h1 className="text-4xl animate-pulse md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+                        INDONESIA PREMIUM
+                        <br />
+                        {/* <span className="bg-gradient-to-r from-gray-300 via-gray-400 to-white bg-clip-text text-transparent">
+                            {displayText}
+                            <span className="animate-pulse">|</span>
+                        </span> */}
+                        <TextShimmer
+                            duration={1.2}
+                            className='text-4xl md:text-6xl lg:text-7xl [--base-color:var(--color-gray-300)] [--base-gradient-color:var(--color-white)] dark:[--base-color:var(--color-gray-300)] dark:[--base-gradient-color:var(--color-white)]'
+                        >
+                            {displayText}
+                        </TextShimmer>
                     </h1>
 
-                    <p
-                        className="rise mx-auto mt-7 max-w-2xl text-lg md:text-xl leading-relaxed text-[#f5f5f5]/85"
-                        style={{ animationDelay: "0.45s" }}
-                    >
-                        Bringing authentic flavors from Indonesia to the world. From tradition to taste.
+                    <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+                        Bringing Authentic Flavors From Indonesia To The World — From Tradition To Taste
                     </p>
 
-                    <div
-                        className="rise mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
-                        style={{ animationDelay: "0.65s" }}
+                    <button
+                        onClick={() => router.push("/brosur")}
+                        style={{
+                            backgroundImage: "url('/assets/EXPLORE PRODUCT.png')",
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                            backgroundRepeat: "no-repeat",
+                        }}
+                        className="px-6 py-2 text-white w-[200px] h-[50px] rounded-full bg-gray-700 "
                     >
-                        <button
-                            onClick={() => router.push("/brosur")}
-                            className="w-full sm:w-auto rounded-full bg-[#ffffff] px-9 py-3.5 text-base font-semibold text-[#0a0a0a] transition hover:bg-[#d4d4d4] hover:shadow-[0_0_32px_rgba(255,255,255,.4)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffffff]"
-                        >
-                            Explore products
-                        </button>
-                        <a
-                            href={WA_QUOTE}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-full sm:w-auto rounded-full border border-[#f5f5f5]/50 bg-black/20 px-9 py-3.5 text-base font-semibold backdrop-blur transition hover:border-white hover:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffffff]"
-                        >
-                            Request a quote
-                        </a>
-                    </div>
 
-                    <dl
-                        className="rise mt-14 mx-auto flex max-w-md items-stretch justify-center divide-x divide-[#f5f5f5]/25 rounded-2xl border border-[#f5f5f5]/15 bg-black/30 py-5 backdrop-blur"
-                        style={{ animationDelay: "0.85s" }}
-                    >
-                        <div className="flex-1 px-6">
-                            <dt className="sr-only">Countries served</dt>
-                            <dd className={`${display.className} text-4xl font-bold text-[#ffffff]`}>50+</dd>
-                            <p className="mt-1 text-sm text-[#f5f5f5]/75">Countries served</p>
-                        </div>
-                        <div className="flex-1 px-6">
-                            <dt className="sr-only">Quality</dt>
-                            <dd className={`${display.className} text-4xl font-bold text-[#ffffff]`}>100%</dd>
-                            <p className="mt-1 text-sm text-[#f5f5f5]/75">Premium quality</p>
-                        </div>
-                    </dl>
-                </div>
+                    </button>
 
-                {/* Spice marquee */}
-                <div className="absolute bottom-0 left-0 right-0 z-10 border-t border-[#ffffff]/25 bg-[#0a0a0a]/70 backdrop-blur-sm overflow-hidden" aria-hidden="true">
-                    <div className="marquee-track flex w-max whitespace-nowrap py-4">
-                        {[...SPICES, ...SPICES].map((s, i) => (
-                            <span key={i} className={`${display.className} flex items-center text-xl text-[#d4d4d4]/90`}>
-                                <span className="px-8">{s}</span>
-                                <span className="h-1.5 w-1.5 rounded-full bg-[#ffffff]" />
-                            </span>
-                        ))}
+
+                    <div className="mt-16 flex justify-center space-x-8 opacity-80">
+                        <div className="text-center">
+                            <div className="text-3xl font-bold text-gray-300">50+</div>
+                            <div className="text-sm text-gray-300">Countries Served</div>
+                        </div>
+                        <div className="text-center">
+                            <div className="text-3xl font-bold text-gray-300">100%</div>
+                            <div className="text-sm text-gray-300">Premium Quality</div>
+                        </div>
                     </div>
                 </div>
+                
 
-                {/* Scroll indicator */}
-                <a
-                    href="#about"
-                    aria-label="Scroll down"
-                    className="absolute bottom-20 left-1/2 z-10 hidden -translate-x-1/2 md:block"
-                >
-                    <div className="flex h-10 w-6 justify-center rounded-full border-2 border-white/60">
-                        <div className="mt-2 h-3 w-1 animate-bounce rounded-full bg-white/80" />
+                {/* Scroll Indicator */}
+                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+                    <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center">
+                        <div className="w-1 h-3 bg-white/80 rounded-full mt-2 animate-bounce"></div>
                     </div>
-                </a>
-            </section>
+                </div>
+            </div>
+
         </div>
     );
 }
