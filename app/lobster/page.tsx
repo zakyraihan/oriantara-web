@@ -115,7 +115,7 @@ export default function NotaToko() {
                             </label>
                         </div>
                         <label className="flex items-center gap-2 text-sm">
-                            <span className="shrink-0 font-medium">NOTA NO.</span>
+                            <span className="shrink-0 font-medium">NOTA no.</span>
                             <input
                                 type="text"
                                 value={notaNo}
