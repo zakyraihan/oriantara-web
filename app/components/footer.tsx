@@ -141,7 +141,7 @@ export default function Footer() {
                     <div className={`lg:col-span-5 ${fx(250).className}`} style={fx(250).style}>
                         <div className="flex items-center gap-3">
                             <Image src="/assets/logo2.png" alt="Oriantara logo" width={50} height={50} />
-                            <span className="font-display text-xl font-bold tracking-wide">Oriantara Group</span>
+                            <span className="font-display text-xl font-bold tracking-wide">Oriantara Commodities</span>
                         </div>
                         <p className="mt-5 max-w-md text-sm leading-relaxed text-gray-300">
                             A national export company dedicated to delivering premium Indonesian natural commodities,
@@ -214,7 +214,7 @@ export default function Footer() {
                 {/* Copyright */}
                 <div className="flex flex-col items-center justify-between gap-4 border-t border-white/15 py-6 sm:flex-row">
                     <p className="text-sm text-gray-400">
-                        © {new Date().getFullYear()} Oriantara Group. All rights reserved.
+                        © {new Date().getFullYear()} Oriantara Commodities. All rights reserved.
                     </p>
                     <a
                         href="#home"

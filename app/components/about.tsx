@@ -208,7 +208,7 @@ export default function AboutSection() {
                             style={fx(850).style}
                         >
                             <p>
-                                Oriantara Group now focuses on high-quality spices such as nutmeg, clove, and
+                                Oriantara Commodities now focuses on high-quality spices such as nutmeg, clove, and
                                 cinnamon. We started with coconut-based products like charcoal and briquettes, and
                                 we continue to grow into coffee, cocoa, and other resources the world values.
                             </p>
