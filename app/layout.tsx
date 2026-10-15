@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Oriantara Group | Indonesian Spices Exporter",
+  title: "Oriantara | Indonesian Spices Exporter",
   description:
     "Oriantara Group is a trusted exporter of premium Indonesian spices and natural commodities: nutmeg, clove, cinnamon, and more.",
 };
