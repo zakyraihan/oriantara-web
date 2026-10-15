@@ -241,7 +241,7 @@ export default function OriantaraLanding() {
                     >
                         <div className="flex-1 px-6">
                             <dt className="sr-only">Countries served</dt>
-                            <dd className={`font-display text-4xl font-bold text-[#ffffff]`}>10+</dd>
+                            <dd className={`font-display text-4xl font-bold text-[#ffffff]`}>5+</dd>
                             <p className="mt-1 text-sm text-[#f5f5f5]/75">Countries served</p>
                         </div>
                         <div className="flex-1 px-6">
